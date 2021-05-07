@@ -8,5 +8,5 @@ class CovidApiProvider extends GetConnect {
     httpClient.baseUrl = 'https://api.covid19api.com';
   }
 
-  Future<Response<Map<String, dynamic>>> getCases(String path) => get(path);
+  Future<Response<dynamic>> getCases(String path) => get(path);
 }

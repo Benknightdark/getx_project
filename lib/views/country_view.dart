@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:getx_project/controllers/contry_controller.dart';
 import 'package:getx_project/utils/views/loading_view.dart';
 import 'dart:ui';
+import 'package:getx_project/views/detail_view.dart';
 
 class CountryView extends StatelessWidget {
   final Countryontroller c = Get.put(Countryontroller());
@@ -35,8 +36,10 @@ class CountryView extends StatelessWidget {
                         final country = c.data[index];
                         return ListTile(
                           onTap: () {
-                            // Get.toNamed('/home/country/details',
-                            //     arguments: country);
+                            Get.to(() => DetailView(), arguments: {
+                              'title': country['Country'],
+                              'code': country['CountryCode']
+                            });
                           },
                           trailing: CircleAvatar(
                             backgroundImage: NetworkImage(

@@ -8,13 +8,14 @@ class DetailController extends GetxController {
   bool get dataAvailable => _dataAvailable.value;
   var _country = "".obs;
   String get country => _country.value;
-
+  var _code = "".obs;
+  String get code => _code.value;
   Future<Map<String, dynamic>> getCases() async {
     final cases = await provider.getCases("/total/dayone/country/$_country");
     if (cases.status.hasError) {
       return Future.error(cases.statusText!);
     } else {
-      var lastData = (cases.body as List<dynamic>).last();
+      var lastData = cases.body.last;
       return lastData;
     }
   }
@@ -22,11 +23,13 @@ class DetailController extends GetxController {
   @override
   Future<void> onInit() async {
     super.onInit();
-    data = await getCases();
-    _dataAvailable.value = true;
+
     var object = Get.arguments;
     if (object != null) {
       _country.value = object['title'];
+      _code.value = object['code'];
+      data = await getCases();
+      _dataAvailable.value = true;
     }
   }
 }
