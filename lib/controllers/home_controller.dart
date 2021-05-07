@@ -19,10 +19,9 @@ class HomeController extends GetxController {
   @override
   Future<void> onInit() async {
     super.onInit();
-    var aa = await getCases();
-    print(aa);
     data = await getCases();
     _dataAvailable.value = true;
+    print(Get.arguments);
   }
 
   @override
