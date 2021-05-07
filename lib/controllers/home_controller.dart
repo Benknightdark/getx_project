@@ -4,6 +4,9 @@ import 'package:getx_project/providers/covid_api_provider.dart';
 class HomeController extends GetxController {
   final CovidApiProvider provider = Get.put(CovidApiProvider());
   Map<String, dynamic> data = {};
+  var _dataAvailable = false.obs;
+  bool get dataAvailable => _dataAvailable.value;
+
   Future<Map<String, dynamic>> getCases() async {
     final cases = await provider.getCases("/summary");
     if (cases.status.hasError) {
@@ -19,6 +22,7 @@ class HomeController extends GetxController {
     var aa = await getCases();
     print(aa);
     data = await getCases();
+    _dataAvailable.value = true;
   }
 
   @override

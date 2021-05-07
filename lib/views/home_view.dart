@@ -11,8 +11,9 @@ class HomeView extends StatelessWidget {
         child: Center(
             child: Column(
       children: [
-        Obx(() => Text("${c.data["Global"]?["TotalConfirmed"]!}",
-            style: TextStyle(fontSize: 45, fontWeight: FontWeight.bold)))
+        Obx(() => c.dataAvailable
+            ? Text("${c.data["Global"]?["TotalConfirmed"]!}")
+            : Text('... waiting ...'))
       ],
     )));
   }
