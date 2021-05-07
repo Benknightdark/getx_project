@@ -23,20 +23,22 @@ class Countryontroller extends GetxController {
   }
 
   Future<void> search(String text) async {
-    // _searchText.value = text;
-    // var originData = await getCases();
+    _dataAvailable.value = false;
+    _searchText.value = text;
+    var originData = await getCases();
 
-    // if (_searchText.value == "") {
-    //   data = originData;
-    // } else {
-    //   data = originData
-    //       .where((element) => element['Country']
-    //           .toString()
-    //           .toLowerCase()
-    //           .contains(_searchText.value.toLowerCase()))
-    //       .toList();
-    // }
-    // var cc = 1;
+    if (_searchText.value == "") {
+      data = originData;
+    } else {
+      data = originData
+          .where((element) => element['Country']
+              .toString()
+              .toLowerCase()
+              .contains(_searchText.value.toLowerCase()))
+          .toList();
+    }
+    update();
+    _dataAvailable.value = true;
   }
 
   @override
