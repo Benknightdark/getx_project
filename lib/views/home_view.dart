@@ -74,7 +74,7 @@ class HomeView extends StatelessWidget {
                         ),
                         onPressed: () {
                           Get.to(() => CountryView(),
-                              arguments: {"title": "城市情況"});
+                              arguments: {"title": "Countries"});
                         },
                         child: Text(
                           '看更多',
