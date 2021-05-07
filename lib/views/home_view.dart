@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:getx_project/controllers/home_controller.dart';
 import 'package:getx_project/utils/views/loading_view.dart';
 import 'package:getx_project/views/country_view.dart';
+import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 
 class HomeView extends StatelessWidget {
 //state["global"]["totalDeaths"]
