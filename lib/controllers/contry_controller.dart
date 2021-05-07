@@ -37,7 +37,7 @@ class Countryontroller extends GetxController {
               .contains(_searchText.value.toLowerCase()))
           .toList();
     }
-    update();
+    // update();
     _dataAvailable.value = true;
   }
 
