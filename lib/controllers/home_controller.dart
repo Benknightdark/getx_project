@@ -12,7 +12,7 @@ class HomeController extends GetxController {
     if (cases.status.hasError) {
       return Future.error(cases.statusText!);
     } else {
-      return cases.body!;
+      return cases.body!['Global'];
     }
   }
 

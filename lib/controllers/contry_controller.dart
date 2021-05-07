@@ -1,19 +1,21 @@
+import 'dart:convert';
+
 import 'package:get/get.dart';
 import 'package:getx_project/providers/covid_api_provider.dart';
 
 class Countryontroller extends GetxController {
   final CovidApiProvider provider = Get.put(CovidApiProvider());
-  Map<String, dynamic> data = {};
+  List<dynamic> data = List.empty();
   var _dataAvailable = false.obs;
   bool get dataAvailable => _dataAvailable.value;
   var _title = "".obs;
   String get title => _title.value;
-  Future<Map<String, dynamic>> getCases() async {
+  Future<List<dynamic>> getCases() async {
     final cases = await provider.getCases("/summary");
     if (cases.status.hasError) {
       return Future.error(cases.statusText!);
     } else {
-      return cases.body!;
+      return cases.body!['Countries'];
     }
   }
 

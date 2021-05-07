@@ -25,6 +25,27 @@ class CountryView extends StatelessWidget {
                   elevation: 0,
                   backgroundColor: Colors.white10,
                   title: Text(c.title)),
+              body: Center(
+                child: ListView.builder(
+                    itemCount: c.data.length,
+                    itemBuilder: (context, index) {
+                      final country = c.data[index];
+                      return ListTile(
+                        onTap: () {
+                          // Get.toNamed('/home/country/details',
+                          //     arguments: country);
+                        },
+                        trailing: CircleAvatar(
+                          backgroundImage: NetworkImage(
+                              "https://flagpedia.net/data/flags/normal/${country['CountryCode'].toLowerCase()}.png"),
+                        ),
+                        title: Text(country['Country']),
+                        // subtitle: Text(
+                        //     // ignore: lines_longer_than_80_chars
+                        //     '${'total_infecteds'.tr}${' ${country.totalConfirmed}'}'),
+                      );
+                    }),
+              ),
             ),
           )
         : LoadingView());

@@ -42,7 +42,7 @@ class HomeView extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        '${c.data['Global']['TotalConfirmed']}',
+                        '${c.data['TotalConfirmed']}',
                         style: TextStyle(
                             fontSize: 45, fontWeight: FontWeight.bold),
                       ),
@@ -56,7 +56,7 @@ class HomeView extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        '${c.data['Global']['TotalDeaths']}',
+                        '${c.data['TotalDeaths']}',
                         style: TextStyle(
                             fontSize: 45, fontWeight: FontWeight.bold),
                       ),
