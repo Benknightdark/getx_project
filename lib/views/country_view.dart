@@ -29,69 +29,66 @@ class CountryView extends StatelessWidget {
               elevation: 0,
               backgroundColor: Colors.white10,
               title: Obx(() => Text(c.title))),
-          body: Obx(() => c.dataAvailable
-              ? Flex(
-                  direction: Axis.vertical,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Stack(
-                        alignment: Alignment.centerRight,
-                        children: [
-                          TextFormField(
-                            controller: t,
-                            decoration: InputDecoration(
-                              focusColor: Colors.black,
-                              labelText: "",
-                              fillColor: Colors.white,
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(25.0),
-                                borderSide: BorderSide(
-                                  color: Colors.red,
-                                  width: 2.0,
+          body: Obx(
+            () => c.dataAvailable
+                ? Flex(
+                    direction: Axis.vertical,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Stack(
+                          alignment: Alignment.centerRight,
+                          children: [
+                            TextFormField(
+                              controller: t,
+                              decoration: InputDecoration(
+                                focusColor: Colors.black,
+                                labelText: "",
+                                fillColor: Colors.white,
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(25.0),
+                                  borderSide: BorderSide(
+                                    color: Colors.red,
+                                    width: 2.0,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                          IconButton(
-                              icon: Icon(Icons.search),
-                              onPressed: () async {
-                                await c.search(t.text);
-                              })
-                        ],
+                            IconButton(
+                                icon: Icon(Icons.search),
+                                onPressed: () async {
+                                  await c.search(t.text);
+                                })
+                          ],
+                        ),
                       ),
-                    ),
-                    Expanded(
-                      child: ListView.builder(
-                          itemCount: c.data.length,
-                          itemBuilder: (context, index) {
-                            final country = c.data[index];
-                            return ListTile(
-                              onTap: () {
-                                Get.to(() => DetailView(), arguments: {
-                                  'title': country['Country'],
-                                  'code': country['CountryCode']
-                                });
-                              },
-                              trailing: CircleAvatar(
-                                backgroundImage: NetworkImage(
-                                    "https://flagpedia.net/data/flags/normal/${country['CountryCode'].toLowerCase()}.png"),
-                              ),
-                              title: Text(country['Country']),
-                              subtitle: Text(
-                                  // ignore: lines_longer_than_80_chars
-                                  'Total Infects： ${country['TotalConfirmed']}'),
-                            );
-                          }),
-                    ),
-                  ],
-                )
-              : Flex(
-                  direction: Axis.vertical,
-                  children: [
-                    LoadingView(),
-                  ],
-                )),
+                      Expanded(
+                        child: ListView.builder(
+                            itemCount: c.data.length,
+                            itemBuilder: (context, index) {
+                              final country = c.data[index];
+                              return ListTile(
+                                onTap: () {
+                                  Get.to(() => DetailView(), arguments: {
+                                    'title': country['Country'],
+                                    'code': country['CountryCode']
+                                  });
+                                },
+                                trailing: CircleAvatar(
+                                  backgroundImage: NetworkImage(
+                                      "https://flagpedia.net/data/flags/normal/${country['CountryCode'].toLowerCase()}.png"),
+                                ),
+                                title: Text(country['Country']),
+                                subtitle: Text(
+                                    // ignore: lines_longer_than_80_chars
+                                    'Total Infects： ${country['TotalConfirmed']}'),
+                              );
+                            }),
+                      ),
+                    ],
+                  )
+                : LoadingView(),
+          ),
         ),
       ),
     );
