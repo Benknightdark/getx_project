@@ -5,34 +5,34 @@ import 'package:getx_project/utils/views/loading_view.dart';
 import 'dart:ui';
 import 'package:getx_project/views/detail_view.dart';
 
+// ignore: must_be_immutable
 class CountryView extends StatelessWidget {
   final Countryontroller c = Get.put(Countryontroller());
   TextEditingController t = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return Obx(() => c.dataAvailable
-        ? Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                colorFilter: ColorFilter.linearToSrgbGamma(),
-                image: NetworkImage(
-                    "https://images.pexels.com/photos/3902882/pexels-photo-3902882.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"),
-              ),
-            ),
-            child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 15.0, sigmaY: 15.0),
-              child: Scaffold(
-                backgroundColor: Colors.transparent,
-                appBar: AppBar(
-                    elevation: 0,
-                    backgroundColor: Colors.white10,
-                    title: Text(c.title)),
-                body: Flex(
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        image: DecorationImage(
+          fit: BoxFit.cover,
+          colorFilter: ColorFilter.linearToSrgbGamma(),
+          image: NetworkImage(
+              "https://images.pexels.com/photos/3902882/pexels-photo-3902882.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"),
+        ),
+      ),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 15.0, sigmaY: 15.0),
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          appBar: AppBar(
+              elevation: 0,
+              backgroundColor: Colors.white10,
+              title: Obx(() => Text(c.title))),
+          body: Obx(() => c.dataAvailable
+              ? Flex(
                   direction: Axis.vertical,
                   children: [
-                    // FloatingSearchAppBarExample(),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Stack(
@@ -61,7 +61,6 @@ class CountryView extends StatelessWidget {
                         ],
                       ),
                     ),
-
                     Expanded(
                       child: ListView.builder(
                           itemCount: c.data.length,
@@ -86,10 +85,16 @@ class CountryView extends StatelessWidget {
                           }),
                     ),
                   ],
-                ),
-              ),
-            ),
-          )
-        : LoadingView());
+                )
+              : Flex(
+                  direction: Axis.vertical,
+                  children: [
+                    LoadingView(),
+                  ],
+                )),
+        ),
+      ),
+    );
   }
 }
+//LoadingView()
